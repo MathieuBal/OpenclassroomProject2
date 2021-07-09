@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from gazpacho import Soup
+import csv
 
 url = 'http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
 
@@ -28,37 +29,40 @@ product_description = []
 category = []
 review_rating =[]
 image_url = []
-
-table = soup.find("table", {"class": "table table-striped"}, mode="first")
-trs = table.find_all("tr")
+product_url =[]
+Tds = []
+produit =[title, universal_product_coc, price_excluding_tax, price_including_tax, number_available, product_description, category, review_rating, image_url]
 
 if response.ok:
-  soup = getParseUrl(url)
-  #title :
-  title.append(soup.find("div", class_ = re.compile("col-sm-6 product_main")).h1.text)
-  # upc :
-  # universal_product_coc.append(soup.find("tr", {'id': 'UPC'}).find("t"))
+  with open('produit.csv', 'w') as outfile :
+    write = csv.writer(outfile)
+    # creer fichier csv - avec entête.
+    outfile.write('title, universal_product_coc, price_excluding_tax, price_including_tax, number_available, product_description, category, review_rating, image_url\n')
 
-  def parse_tr(tr):
-    return {
-        "universal_product_coc": tr.find("td")[0].text,
-        "price_excluding_tax": tr.find("td")[2].text,
-        "price_including_tax": tr.find("td")[3].text,
-        "number_available": tr.find("td")[5].text,
-        "review_rating": tr.find("td")[-1].text, }
-  # number available :
-  # how to remove some characters ?
-  number_available.append(soup.find("p", class_= re.compile("instock availability")).text)
-  # description
-  # how to select description <p>
-  #product_description.append(soup.find("p", class_=re.compile("product_description")).text)
-  # category :
-  category.append(soup.find("a", href = re.compile("../category/books/")).text)
-  # review rating :
+    soup = getParseUrl(url)
+    #title :
+    title.append(soup.find("div", class_ = re.compile("col-sm-6 product_main")).h1.text)
+    # find all td in table
+    Tds.append(soup.findAll("td"))
 
-  # image url :
-  # how to have all url ?
-  image_url.append(soup.find("img").get("src"))
-# test github
+    for td in Tds :
+      #Upc :
+      universal_product_coc.append(Tds[0][0].text)
+      # price excluding tax :
+      price_excluding_tax.append(Tds[0][2].text)
+      # price including tax :
+      price_including_tax.append(Tds[0][3].text)
+      # number available :
+      number_available.append(Tds[0][5].text)
+    # number available 2nd option:
+    #number_available.append(soup.find("p", class_=re.compile("instock availability")).text.strip())
+    # description
+    product_description.append(soup.find("p", attrs={'class': None}).text.strip())
+    # category :
+    category.append(soup.find("a", href = re.compile("../category/books/")).text)
+    # review rating :
+    # image url :
+    image_url.append(soup.find("img").get("src").replace("../../","http://books.toscrape.com/"))
+    write.writerow(produit)
 
-print(table)
+print("fin des programmes")
