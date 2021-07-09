@@ -20,6 +20,7 @@ def getParseUrl(url):
 	soup = BeautifulSoup(response.text, 'html.parser')
 	return(soup)
 
+# listes des éléments a récuperer
 title = []
 universal_product_coc = []
 price_including_tax = []
@@ -30,7 +31,9 @@ category = []
 review_rating =[]
 image_url = []
 product_url =[]
+# liste des "td" 
 Tds = []
+# liste produit regroupant toutes les infos produits
 produit =[title, universal_product_coc, price_excluding_tax, price_including_tax, number_available, product_description, category, review_rating, image_url]
 
 if response.ok:
@@ -61,8 +64,10 @@ if response.ok:
     # category :
     category.append(soup.find("a", href = re.compile("../category/books/")).text)
     # review rating :
+
     # image url :
     image_url.append(soup.find("img").get("src").replace("../../","http://books.toscrape.com/"))
+    # ajout des infos produit au fichier csv
     write.writerow(produit)
 
 print("fin des programmes")
