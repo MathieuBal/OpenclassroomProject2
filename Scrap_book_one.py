@@ -62,20 +62,20 @@ if response.ok:
     # number available 2nd option:
     #number_available.append(soup.find("p", class_=re.compile("instock availability")).text.strip())
     # description
-    product_description.append(soup.find("p", attrs={'class': None}).text.strip())
+    product_description = soup.find("p", attrs={'class': None}).text.strip()
     # category :
     category = soup.find("a", href = re.compile("../category/books/")).text
     # review rating :
     image_div2 = soup.find('div', attrs={'class': 'col-sm-6 product_main'})
     rating = image_div2.select('p.star-rating')
     for star in rating:
-        print("===============================",star)
+        # print("===============================",star)
         rating = star.attrs['class'][-1]
-        print("=====>>>>>>>>",star.attrs['class'])
+        # print("=====>>>>>>>>",star.attrs['class'])
 
     # image url :
     image_url.append(soup.find("img").get("src").replace("../../","http://books.toscrape.com/"))
     # ajout des infos produit au fichier csv
-    # write.writerow({'title': title, })
+    write.writerow({'title': title,  })
 
 print("fin des programmes", rating)
