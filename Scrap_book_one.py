@@ -74,7 +74,7 @@ if response.ok:
     # image url :
     image_url = (soup.find("img").get("src").replace("../../","http://books.toscrape.com/"))
     # ajout des infos produit au fichier csv
-    write.writerow({'title', 'UPC', 'price_excluding_tax', 'price_including_tax', 'number_available', 'product_description', 'category', 'review_rating', 'image_url', 'product_url'})
-    write.writerow({title, universal_product_coc, price_excluding_tax, price_including_tax,  number_available, product_description, category, rating + ' out of five', image_url, url})
+    write.writerow(['title', 'UPC', 'price_excluding_tax', 'price_including_tax', 'number_available', 'product_description', 'category', 'review_rating', 'image_url', 'product_url'])
+    write.writerow([title, universal_product_coc, price_excluding_tax, price_including_tax,  number_available, product_description, category, rating + ' out of five', image_url, url])
 
 print("fin des programmes", )
