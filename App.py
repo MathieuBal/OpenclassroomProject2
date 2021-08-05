@@ -3,11 +3,16 @@ import book_info_scrap
 def main ():
     print("début d'application")
 
-def get_Parse_Url(url):
+def get_Parse_Url():
+    print("récupération des données html")
 
 def get_book_info():
+    print("récupération htlm : ok")
+    print("récupération informations des livres")
 
 def write_csv_file():
+    print("informations récupérées")
+    print("création d'un fichier csv ")
 
 
 

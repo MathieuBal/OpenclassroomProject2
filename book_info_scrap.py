@@ -8,11 +8,11 @@ import csv
 
 # 1 : request html + html parser
 
-def get_Parse_Url(url):
-  url = 'http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
-	response = requests.get(url)
-	soup = BeautifulSoup(response.text, 'html.parser')
-	return(soup)
+  def get_Parse_Url(url):
+      url = 'http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
+  	  response = requests.get(url)
+  	  soup = BeautifulSoup(response.text, 'html.parser')
+  	  return(soup)
 
 # 2 : scrap book information 
 
