@@ -3,7 +3,7 @@ import book_info_scrap
 def main ():
     print("début d'application")
 
-def get_Parse_Url():
+def get_parse_url():
     print("récupération des données html")
 
 def get_book_info():
