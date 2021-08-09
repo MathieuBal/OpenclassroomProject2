@@ -2,10 +2,6 @@ import book_info_scrap
 
 def main ():
     print("début d'application")
-    print("récupération des données html")
-    url = 'http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
-    book_info_scrap.get_parse_url(url)
-    print("récupération htlm : ok")
     print("récupération informations des livres")
     book_info_scrap.get_book_info()
     print("informations récupérées")
