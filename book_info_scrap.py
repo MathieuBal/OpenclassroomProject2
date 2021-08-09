@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 
 
-""" 1 : request html and html parser """
+# 1 : request html and html parser
 def get_parse_url(url):
     """ use requests and if response is ok use BeautifulSoup to parse """
     url = 'http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
@@ -14,35 +14,35 @@ def get_parse_url(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     return(soup)
 
-""" 2 : scrap book information """
+# 2 : scrap book information
 def get_book_info():
     """ liste des "td" """
     tds_list = []
     if response.ok:
         soup = get_parse_url(url)
-        """ title : """
+        # title :
         title  = soup.find("div", class_ = re.compile("col-sm-6 product_main")).h1.text
-        """ find all td in table """
+        # find all td in table
         tds_list.append(soup.findAll("td"))
         for td in tds_list :
-            """ Upc : """
+            # Upc :
             universal_product_coc = (tds_list[0][0].text)
-            """ price excluding tax : """
+            # price excluding tax :
             price_excluding_tax = (tds_list[0][2].text)
-            """ price including tax : """
+            # price including tax :
             price_including_tax = (tds_list[0][3].text)
-            """ number available : """
+            # number available :
             number_available = (tds_list[0][5].text)
-        """ description """
+        # description
         product_description = soup.find("p", attrs={'class': None}).text.strip()
-        """category :"""
+        # category :
         category = soup.find("a", href = re.compile("../category/books/")).text
-        """review rating :"""
+        # review rating :
         image_div2 = soup.find('div', attrs={'class': 'col-sm-6 product_main'})
         rating = image_div2.select('p.star-rating')
         for star in rating:
             rating = star.attrs['class'][-1]
-        """image url :"""
+        # image url :
         image_url = (soup.find("img").get("src").replace("../../","http://books.toscrape.com/"))
 
 """3 : Open and write cvs file"""
