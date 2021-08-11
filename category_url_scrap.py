@@ -20,12 +20,13 @@ def get_Parse_Url(url):
 # scraper les urls des catégories 
 
 if response.ok:
-	category_urls = []
+	#category_urls = []
 	soup = get_Parse_Url(url)
-	ul = soup.findAll('ul', class_="nav nav-list")
+	ul = soup.find('ul', class_="nav nav-list").findChildren("ul")
+	#print (ul)
 	for li in ul :
-		soup2 = BeautifulSoup(str(ul), 'html.parser')
-		hrefs = soup2.find('a', href=True)		
-		category_urls.append(hrefs.get("href").replace("catalogue/","http://books.toscrape.com/catalogue/"))
-	for x in category_urls :
-	    print (x)
+		# soup2 = BeautifulSoup(str(ul), 'html.parser')
+		hrefs = li.find_all('a', href=True)
+		print(hrefs)	
+		#category_urls = (hrefs.get_all("href").replace("catalogue/","http://books.toscrape.com/catalogue/"))
+	#print (category_urls)
