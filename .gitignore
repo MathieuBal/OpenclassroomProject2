@@ -1,2 +1,4 @@
 Programme_extraction_des_prix_env/
 __pycache__/
+venv
+.idea

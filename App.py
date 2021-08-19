@@ -1,3 +1,5 @@
+"""programme d'analyse et d'extractions des informations des livres disponibles sur le site booktoscrap"""
+import category_url_scrap
 import book_info_scrap
 
 def main ():
@@ -9,8 +11,6 @@ def main ():
     book_info_scrap.write_csv_file()
     print("fichier csv créé avec succès")
     print("fin d'application")
-
-
 
 if __name__ == "__main__":
     # execute only if run as a script

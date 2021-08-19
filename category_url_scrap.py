@@ -1,32 +1,21 @@
-# -*- coding: utf8 -*-
+""" -*- coding: utf8 -*- """
 import requests
 from bs4 import BeautifulSoup
 
-url = "http://books.toscrape.com/index.html"
 
-response = requests.get(url)
-
-#print(response.text)
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-#print(soup.prettify())
-
-def get_Parse_Url(url):
+def get_parse_category_url(url):
+	""" use requests and if response is ok use BeautifulSoup to parse """
 	response = requests.get(url)
 	soup = BeautifulSoup(response.text, 'html.parser')
-	return(soup)
+	return soup
 
-# scraper les urls des catégories 
 
-if response.ok:
-	#category_urls = []
-	soup = get_Parse_Url(url)
-	ul = soup.find('ul', class_="nav nav-list").findChildren("ul")
-	#print (ul)
-	# soup2 = BeautifulSoup(str(ul), 'html.parser')
-	for li in ul :
-	    hrefs = li.find('a', href=True).get("href").replace("catalogue/","http://books.toscrape.com/catalogue/")
-	    #category_urls.append(hrefs.get("href").replace("catalogue/","http://books.toscrape.com/catalogue/"))
-	print (li)
-	print(hrefs)
+# scraper les urls des categories
+def get_category_urls():
+	"""scrap all urls from index page"""
+	url = "http://books.toscrape.com/index.html"
+	soup = get_parse_category_url(url)
+	list_li = soup.find('ul', class_="nav nav-list").find_next("ul").findChildren("li")
+	for li in list_li:
+		list_links = li.find('a', href=True).get("href").replace("catalogue/", "http://books.toscrape.com/catalogue/")
+		print(list_links)
