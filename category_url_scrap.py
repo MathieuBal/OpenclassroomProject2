@@ -18,4 +18,3 @@ def get_category_urls():
 	list_li = soup.find('ul', class_="nav nav-list").find_next("ul").findChildren("li")
 	for li in list_li:
 		list_links = li.find('a', href=True).get("href").replace("catalogue/", "http://books.toscrape.com/catalogue/")
-		print(list_links)
