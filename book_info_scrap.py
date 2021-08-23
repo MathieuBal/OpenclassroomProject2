@@ -15,9 +15,12 @@ def get_parse_url(url):
 def get_book_info():
     """ scrap all books information """
     with open("books_links.csv", "r") as file:
+        all_book_data = []
+        livre = 1
         for row in file:
             url = row.strip()
             soup = get_parse_url(url)
+            print("***** livres scrapés :", livre, " *****")
             # title :
             title = soup.find("div", class_=re.compile("col-sm-6 product_main")).h1.text
             # find all td in table
@@ -38,10 +41,12 @@ def get_book_info():
             # image url :
             image_url = (soup.find("img").get("src").replace("../../", "http://books.toscrape.com/"))
             # stock all book info into list :
-            book_data = [title, universal_product_coc, price_excluding_tax,
+
+            book_data = (title, universal_product_coc, price_excluding_tax,
                          price_including_tax, number_available, product_description,
-                         category, rating + ' out of five', image_url, url]
-    return book_data
+                         category, rating + ' out of five', image_url, url)
+            all_book_data.append(book_data)
+    return all_book_data
 
 
 def write_csv_books_infos_file():
@@ -53,5 +58,3 @@ def write_csv_books_infos_file():
         write = csv.writer(outfile)
         write.writerow([header_name, ])
         write.writerow(get_book_info())
-
-get_book_info()
