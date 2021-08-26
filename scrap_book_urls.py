@@ -1,5 +1,4 @@
 import requests
-import re
 import csv
 from bs4 import BeautifulSoup
 
@@ -9,51 +8,37 @@ def get_parse_books_url(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
-def find_page_number(url):
-    soup = get_parse_books_url(url)
-    page_number = soup.find('li', {'class': 'current'}).text
-    number = page_number.split()[3]
-    return number
 
 def get_books_links():
     with open("category_links.csv", "r") as file:
         books_links = []
         category = 1
-        print(books_links)
+        # print(books_links)
         for row in file:
-            print("***** catégories scrapés :", category, " *****")
+            print("*****    category:", category, "    *****")
             category += 1
-            page = 1
-            url = row.strip()
-            while True:
-                soup = get_parse_books_url(url)
-                print("***** pages livres :", page, " *****")
-                check_next_link = soup.find('li', {'class': 'next'})
-                if check_next_link:
-                    url = url.replace("index", "page-1")
-                    pages_books_links = scrap_book(url)
-                    for links in pages_books_links:
-                        books_links.append(links)
-                    check_previous_link = soup.find('li', {'class': 'previous'})
-                    if check_previous_link:
-                        url = url.replace("page-2", "page-{}").format(page)
-                else:
-                    page_books_links = scrap_book(url)
-                    for links in page_books_links:
-                        books_links.append(links)
-
-                    # link to next page
-                if check_next_link:
-                    number = find_page_number(url)
-                    url = url.replace("page-1", "page-2")
-                    page += 1
-
-                    #url = url + href_next_page
-
-                else:
-                    break  # exit `while True`
+            all_category_books = work_with_one_categorie(row)
+            for url in all_category_books:
+                books_links.append(url)
 
     return books_links
+
+def work_with_one_categorie(row):
+    one_category_links=[]
+    url_base = row.strip().replace("index.html", "")
+    url = f"{url_base}index.html"
+    while url:
+        soup = get_parse_books_url(url)
+        pages_books_links = scrap_book(url)
+        for links in pages_books_links:
+            one_category_links.append(links)
+        next_number = soup.find('li', {'class': 'next'})
+        if next_number:
+            next_link = next_number.find("a", href=True).get("href")
+            url = f"{url_base}{next_link}"
+        else:
+            url = None
+    return one_category_links
 
 
 def scrap_book(url):
@@ -72,5 +57,3 @@ def write_csv_books_urls_file():
         for link in get_books_links():
             outfile.write(link + '\n')
 
-
-get_books_links()
