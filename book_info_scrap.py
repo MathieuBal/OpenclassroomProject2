@@ -21,8 +21,7 @@ def get_book_info():
         livre = 1
         image_folder()
         for row in file:
-            #url = row.strip()
-            url = "http://books.toscrape.com/catalogue/at-the-existentialist-cafe-freedom-being-and-apricot-cocktails-with-jean-paul-sartre-simone-de-beauvoir-albert-camus-martin-heidegger-edmund-husserl-karl-jaspers-maurice-merleau-ponty-and-others_459/index.html"
+            url = row.strip()
 
             soup = get_parse_url(url)
             print("***** livres scrapés :", livre, " *****")
@@ -63,15 +62,12 @@ def get_book_info():
 
 
 def download_image(row):
-    # url = row.strip()
-    url = "http://books.toscrape.com/catalogue/at-the-existentialist-cafe-freedom-being-and-apricot-cocktails-with-jean-paul-sartre-simone-de-beauvoir-albert-camus-martin-heidegger-edmund-husserl-karl-jaspers-maurice-merleau-ponty-and-others_459/index.html"
+    url = row.strip()
     soup = get_parse_url(url)
     image_url = (soup.find("img").get("src").replace("../../", "http://books.toscrape.com/"))
     filename = url.split("/")[4]
-    open_image = urllib.request.urlretrieve(image_url, f"{filename}.jpg")
-    #read_image = open_image.read()
-   # with open(f"books_images/{filename}.jpg", "wb") as img_file:
-       # img_file.write(read_image)
+    open_image = urllib.request.urlretrieve(image_url, f"books_images/{filename}.jpg")
+
 
 def image_folder():
     path = "books_images"
@@ -92,5 +88,3 @@ def write_csv_books_infos_file():
         write.writerow([header_name, ])
         for book in get_book_info():
             write.writerow(book)
-
-get_book_info()

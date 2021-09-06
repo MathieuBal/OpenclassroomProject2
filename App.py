@@ -1,6 +1,6 @@
 """programme analyse et extractions des information des livres disponibles sur le site booktoscrap"""
 import scrap_book_urls
-# import book_info_scrap
+import book_info_scrap
 import category_url_scrap
 
 
@@ -14,13 +14,14 @@ def main():
     print("*****  création de fichier csv  *****")
     print("*****  du scrap urls des books  *****")
     print("*****       chargement          *****")
+
     scrap_book_urls.write_csv_books_urls_file()
     print("*****    fichier csv créé       *****")
     print("*****  début du scrap des books *****")
     print("*****  création de fichier csv  *****")
     print("*****  du scrap infos des books *****")
     print("*****       chargement          *****")
-    # book_info_scrap.write_csv_books_infos_file()
+    book_info_scrap.write_csv_books_infos_file()
     print("*****    fichier csv créé       *****")
     print("*****    fin de programme       *****")
 
