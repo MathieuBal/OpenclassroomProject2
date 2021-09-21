@@ -18,11 +18,11 @@
 
                             This program has the function of : 
                                                   
-  1. Retrieve the links of the different book category on the website : https://books.toscrape.com/.
+    1. Retrieve the links of the different book category on the website : https://books.toscrape.com/.
 
-  2. Retrieve for each category, the links of all the books.
+    2. Retrieve for each category, the links of all the books.
 
-  3. Retrieve the following information on the product page of the book : product_page_url
+    3. Retrieve the following information on the product page of the book : product_page_url
                                                                             universal_ product_code (upc)
                                                                             title
                                                                             price_including_tax
@@ -43,13 +43,13 @@
                                                               
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                             How to Use :
+                                   How to Use :
                                                              
-                               To launch the program, all you need to do is launch the file App.py. 
-                       After 7 minutes you will find 3 CSV files and an image folder containers respectively :  
-                                                - All the links of the different categories of books,
-                                                - All books in the different categories,
-                                                - Information from all books,
-                                                - A folder of all images from books.
+        To launch the program, all you need to do is launch the file App.py. 
+    After 7 minutes you will find 3 CSV files and an image folder containers respectively :  
+                   - All the links of the different categories of books,
+                   - All books in the different categories,
+                   - Information from all books,
+                   - A folder of all images from books.
                                                              
 ----------------------------------------------------------------------------------------------------------------------------------------------
