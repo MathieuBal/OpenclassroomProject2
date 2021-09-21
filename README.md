@@ -8,21 +8,21 @@
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-                              Scrapping Programme for OpenClassrooms project 2 by Mathieu Balayé
+             Scrapping Programme for OpenClassrooms project 2 by Mathieu Balayé
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-                              Warning !! This program is only compatible with a linux OS !
+                Warning !! This program is only compatible with a linux OS !
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                  This program has the function of : 
+                            This program has the function of : 
                                                   
-    1. Retrieve the links of the different book category on the website : https://books.toscrape.com/.
+  1. Retrieve the links of the different book category on the website : https://books.toscrape.com/.
 
-    2. Retrieve for each category, the links of all the books.
+  2. Retrieve for each category, the links of all the books.
 
-    3. Retrieve the following information on the product page of the book : product_page_url
+  3. Retrieve the following information on the product page of the book : product_page_url
                                                                             universal_ product_code (upc)
                                                                             title
                                                                             price_including_tax
@@ -35,11 +35,11 @@
                                                                         
 ----------------------------------------------------------------------------------------------------------------------------------------------
                                                                       
-                                                            requirements :
+                                  requirements :
 
-                                                              bs4==0.0.1
-                                                              requests==2.22.0
-                                                              urllib3==1.25.8
+                                    bs4==0.0.1
+                               requests==2.22.0
+                                urllib3==1.25.8
                                                               
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
